@@ -1,0 +1,39 @@
+{
+  "name": "fitchamp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "expo start",
+    "web": "vite --host",
+    "build:web": "vite build",
+    "test:indian-meals": "node --experimental-strip-types src/services/testIndianMealNames.ts",
+    "deploy:firebase": "npm run build:web && firebase deploy",
+    "deploy:hosting": "npm run build:web && firebase deploy --only hosting",
+    "deploy:vercel": "vercel --prod"
+  },
+  "dependencies": {
+    "@google/genai": "^2.18.0",
+    "dotenv": "^17.4.2",
+    "expo": "^54.0.36",
+    "expo-image-manipulator": "~14.0.8",
+    "expo-sensors": "~15.0.8",
+    "firebase": "^10.12.2",
+    "lucide-react-native": "^1.27.0",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-native": "^0.81.5",
+    "react-native-svg": "^15.12.1",
+    "react-native-web": "^0.21.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.24.0",
+    "@types/react": "~19.1.10",
+    "@types/react-dom": "~19.1.7",
+    "@types/react-native": "^0.73.0",
+    "@vitejs/plugin-react": "^4.7.0",
+    "babel-preset-expo": "^57.0.4",
+    "firebase-tools": "^15.24.0",
+    "typescript": "~5.9.2",
+    "vite": "^5.2.11"
+  }
+}

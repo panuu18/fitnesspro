@@ -1,0 +1,20 @@
+{
+  "expo": {
+    "name": "Fitchamp",
+    "slug": "fitchamp",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "ios": {
+      "supportsTablet": true
+    },
+    "plugins": [
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow Fitchamp to access your device motion to track your steps."
+        }
+      ]
+    ]
+  }
+}
