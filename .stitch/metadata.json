@@ -1,0 +1,25 @@
+{
+  "name": "projects/15948974771920939454",
+  "projectId": "15948974771920939454",
+  "title": "FitnessPro",
+  "visibility": "PRIVATE",
+  "createTime": "2026-08-24T03:20:26.062713Z",
+  "updateTime": "2026-08-24T03:20:26.062713Z",
+  "projectType": "PROJECT_DESIGN",
+  "origin": "STITCH",
+  "deviceType": "MOBILE",
+  "designTheme": {},
+  "screens": {
+    "dashboard": {
+      "id": "579c5a95bcde4abcaa54c9ebaa05819e",
+      "sourceScreen": "projects/15948974771920939454/screens/579c5a95bcde4abcaa54c9ebaa05819e",
+      "x": 0,
+      "y": 0,
+      "width": 1904,
+      "height": 2056
+    }
+  },
+  "metadata": {
+    "userRole": "OWNER"
+  }
+}
