@@ -51,6 +51,8 @@ export default defineConfig({
     alias: {
       'react-native/Libraries/Utilities/codegenNativeComponent': path.resolve(__dirname, './src/mock-codegenNativeComponent.js'),
       'react-native': 'react-native-web',
+      'expo-sensors': path.resolve(__dirname, './src/mock-expo-sensors.ts'),
+      'expo-image-manipulator': path.resolve(__dirname, './src/mock-expo-image-manipulator.ts'),
     },
     extensions: ['.web.tsx', '.web.ts', '.web.jsx', '.web.js', '.tsx', '.ts', '.jsx', '.js'],
   },

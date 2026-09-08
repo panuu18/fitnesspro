@@ -38,8 +38,27 @@
         background: #475569;
       }
     </style>
-  </head>
-  <body>
+    <script>
+      if (typeof globalThis !== 'undefined' && !globalThis.expo) {
+        class MockNativeModule {}
+        class MockEventEmitter {
+          addListener() { return { remove: () => {} }; }
+          removeListener() {}
+          emit() {}
+        }
+        globalThis.expo = {
+          NativeModule: MockNativeModule,
+          SharedObject: class {},
+          SharedRef: class {},
+          EventEmitter: MockEventEmitter,
+          modules: {},
+          uuidv4: () => Math.random().toString(36).substring(2),
+          uuidv5: () => Math.random().toString(36).substring(2),
+          getViewConfig: () => ({}),
+          reloadAppAsync: async () => window.location.reload(),
+        };
+      }
+    </script>
     <div id="root"></div>
     <script type="module" src="/src/index.tsx"></script>
   </body>
