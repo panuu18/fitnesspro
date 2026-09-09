@@ -41,11 +41,9 @@ export default defineConfig({
   plugins: [react(), socketResiliencePlugin()],
   define: {
     global: 'window',
-    'process.env': {
-      GEMINI_API_KEY: process.env.GEMINI_API_KEY || '',
-      VITE_GEMINI_API_KEY: process.env.VITE_GEMINI_API_KEY || '',
-    },
-    __DEV__: process.env.NODE_ENV !== 'production' || true,
+    'process.env.GEMINI_API_KEY': JSON.stringify((process.env.GEMINI_API_KEY || '').replace(/[^\x20-\x7E]/g, '').trim()),
+    'process.env.VITE_GEMINI_API_KEY': JSON.stringify((process.env.VITE_GEMINI_API_KEY || '').replace(/[^\x20-\x7E]/g, '').trim()),
+    __DEV__: JSON.stringify(process.env.NODE_ENV !== 'production'),
   },
   resolve: {
     alias: {

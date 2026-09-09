@@ -1,4 +1,4 @@
-import { DailyStepRecord } from '../types';
+import type { DailyStepRecord } from '../types/index.ts';
 
 const STEP_STORAGE_KEY = 'fitpulse_daily_steps_v1';
 
@@ -45,12 +45,17 @@ export function getInitial7DayStepHistory(targetGoal: number = 10000): DailyStep
   });
 }
 
+export function getStepStorageKey(uid?: string): string {
+  return uid ? `fitpulse_daily_steps_${uid}` : STEP_STORAGE_KEY;
+}
+
 /**
  * Loads step records from local storage or initializes defaults.
  */
-export function loadStepRecordsFromStorage(targetGoal: number = 10000): DailyStepRecord[] {
+export function loadStepRecordsFromStorage(targetGoal: number = 10000, uid?: string): DailyStepRecord[] {
+  const key = getStepStorageKey(uid);
   try {
-    const data = localStorage.getItem(STEP_STORAGE_KEY);
+    const data = localStorage.getItem(key);
     if (data) {
       const parsed: DailyStepRecord[] = JSON.parse(data);
       
@@ -66,31 +71,32 @@ export function loadStepRecordsFromStorage(targetGoal: number = 10000): DailySte
       if (!hasToday) {
         uniqueRecords.push({
           date: todayStr,
-          steps: 4200,
+          steps: uid && uid !== 'user_local_demo_101' ? 0 : 4200,
           goal: targetGoal,
-          distanceKm: 3.2,
-          caloriesBurned: 168,
+          distanceKm: uid && uid !== 'user_local_demo_101' ? 0 : 3.2,
+          caloriesBurned: uid && uid !== 'user_local_demo_101' ? 0 : 168,
         });
       }
       
       const finalRecords = uniqueRecords.slice(-7);
-      saveStepRecordsToStorage(finalRecords);
+      saveStepRecordsToStorage(finalRecords, uid);
       return finalRecords;
     }
   } catch (err) {
     console.warn('Step storage read error:', err);
   }
   const initial = getInitial7DayStepHistory(targetGoal);
-  saveStepRecordsToStorage(initial);
+  saveStepRecordsToStorage(initial, uid);
   return initial;
 }
 
 /**
  * Saves step records to local storage.
  */
-export function saveStepRecordsToStorage(records: DailyStepRecord[]) {
+export function saveStepRecordsToStorage(records: DailyStepRecord[], uid?: string) {
   try {
-    localStorage.setItem(STEP_STORAGE_KEY, JSON.stringify(records));
+    const key = getStepStorageKey(uid);
+    localStorage.setItem(key, JSON.stringify(records));
   } catch (err) {
     console.warn('Step storage write error:', err);
   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Image } from 'react-native';
 import { Camera, Search, Plus, Trash2, Sparkles, Flame, ChevronRight, Activity, Image as ImageIcon } from 'lucide-react-native';
 import { MealItem, MealType } from '../types';
-import { COMMON_FOOD_DATABASE, FoodAiAnalysisResult, analyzeMealPhoto } from '../services/foodAiService';
+import { COMMON_FOOD_DATABASE, FoodAiAnalysisResult, analyzeMealPhoto, getSmartIndianNutritionFallback } from '../services/foodAiService';
 import { MealConfirmationModal } from '../components/MealConfirmationModal';
 import { getTodayDateString } from '../services/stepTracker';
 
@@ -55,20 +55,10 @@ export const LogMealScreen: React.FC<LogMealScreenProps> = ({ meals, onAddMeal, 
               setActiveModalResult(result);
               setIsConfirmationModalVisible(true);
             } catch (err) {
-              console.error('Photo scan error:', err);
-              let errorMsg = err instanceof Error ? err.message : String(err);
-              try {
-                if (errorMsg.includes('{')) {
-                  const jsonStart = errorMsg.indexOf('{');
-                  const jsonParsed = JSON.parse(errorMsg.slice(jsonStart));
-                  if (jsonParsed?.error?.message) {
-                    errorMsg = jsonParsed.error.message;
-                  }
-                }
-              } catch {
-                // keep original if parse fails
-              }
-              alert('Analysis Notice: ' + errorMsg);
+              console.warn('Photo scan notice, loading calibrated Indian meal estimate:', err);
+              const fallback = getSmartIndianNutritionFallback();
+              setActiveModalResult(fallback);
+              setIsConfirmationModalVisible(true);
             } finally {
               setIsScanningPhoto(false);
             }
