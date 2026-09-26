@@ -2,7 +2,7 @@
 
 Welcome to **FitChamp**! This repository contains the source code for our cross-platform fitness application, built to help you track your steps, meals, and climb the leaderboard.
 
-🔗 **[Visit Our Website](https://fitpulse-pro.web.app)** - Start using FitChamp today!
+🔗 **[Visit Our Website](https://fitnesspro-alpha.vercel.app/)** - Start using FitChamp today!
 
 ## 📱 About The Project
 
